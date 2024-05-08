@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>正在跳转中</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  // git push remoteAddr master
+  // git remote -v 
+window.onload = function() {
+  // 获取URL中的参数
+  var urlParams = new URLSearchParams(window.location.search);
+  var url = urlParams.get('url');
+  var title = urlParams.get('title'); 
+  var wait = urlParams.get('wait');
+
+  if (wait){
+    const number = parseInt(wait);
+    console.log("开始倒计时...");
+    countdown(number);
+  }
+
+  function countdown(seconds) {
+  var countdownDiv = document.getElementById("countdown");
+
+  var interval = setInterval(function() {
+    countdownDiv.innerHTML = "将在" + seconds + "秒后自动跳转";
+    if (seconds <= 0) {
+      clearInterval(interval);
+      countdownDiv.innerHTML = "";
+      window.location.href = url;
+    }
+    seconds--;
+    console.log(111)
+  }, 1000);
+}
+  // 修改title
+  if (title) {
+    document.title = title;
+  }
+  
+
+};
+
+
+</script>
+<style>
+
+
+</style>
+</head>
+<body>
+  <div id="countdown"></div>
+</body>
+</html>
